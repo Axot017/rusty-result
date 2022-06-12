@@ -90,4 +90,15 @@ void main() {
       expect(const Err(1).err, 1);
     });
   });
+
+  group('inspect', () {
+    test('should do nothing', () {
+      const value = Err(1);
+      final valueChanged = MockedValueChanged();
+
+      final result = value.inspect(valueChanged.call);
+      expect(result, value);
+      verifyNever(() => valueChanged.call(any));
+    });
+  });
 }
