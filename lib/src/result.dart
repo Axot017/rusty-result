@@ -32,4 +32,7 @@ abstract class Result<OK, ERR> {
 
   /// returns value if type is Ok or null if type is Err
   OK? get ok;
+
+  /// returns error if type is Err or null if type is Ok
+  ERR? get err;
 }
