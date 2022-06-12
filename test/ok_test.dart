@@ -90,4 +90,16 @@ void main() {
       expect(const Ok(1).err, null);
     });
   });
+
+  group('inspect', () {
+    test('should call given function', () {
+      const value = Ok(1);
+      final valueChanged = MockedValueChanged<int>();
+      when(() => valueChanged.call(any())).thenReturn(null);
+
+      final result = value.inspect(valueChanged.call);
+      expect(result, value);
+      verify(() => valueChanged.call(1)).called(1);
+    });
+  });
 }

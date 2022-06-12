@@ -36,4 +36,9 @@ class Err<OK, ERR> implements Result<OK, ERR> {
 
   @override
   ERR? get err => error;
+
+  @override
+  Result<OK, ERR> inspect(void Function(OK) f) {
+    return this;
+  }
 }
