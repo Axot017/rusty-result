@@ -41,4 +41,7 @@ abstract class Result<OK, ERR> {
 
   /// calls given [f] if type is Err. Returns `this`
   Result<OK, ERR> inspectErr(void Function(ERR) f);
+
+  /// Transforms Result<T, E> into Result<U, E> by applying the provided function to the contained value of Ok and leaving Err unchanged
+  Result<O, ERR> map<O>(O Function(OK) f);
 }

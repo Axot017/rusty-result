@@ -47,4 +47,9 @@ class Ok<OK, ERR> implements Result<OK, ERR> {
   Result<OK, ERR> inspectErr(void Function(ERR) f) {
     return this;
   }
+
+  @override
+  Result<O, ERR> map<O>(O Function(OK) f) {
+    return Ok(f(value));
+  }
 }

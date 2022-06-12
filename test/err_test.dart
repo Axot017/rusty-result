@@ -113,4 +113,11 @@ void main() {
       verify(() => valueChanged.call(1)).called(1);
     });
   });
+
+  group('map', () {
+    test('chould do nothing', () {
+      const error = Err(1);
+      expect(error.map((v) => v.toString()), error);
+    });
+  });
 }

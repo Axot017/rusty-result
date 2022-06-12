@@ -113,4 +113,11 @@ void main() {
       verifyNever(() => valueChanged.call(any));
     });
   });
+
+  group('map', () {
+    test('should map int to string', () {
+      const value = Ok(1);
+      expect(value.map((v) => v.toString()), const Ok('1'));
+    });
+  });
 }
