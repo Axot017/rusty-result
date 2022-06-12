@@ -38,4 +38,7 @@ abstract class Result<OK, ERR> {
 
   /// calls given [f] if type is Ok. Returns `this`
   Result<OK, ERR> inspect(void Function(OK) f);
+
+  /// calls given [f] if type is Err. Returns `this`
+  Result<OK, ERR> inspectErr(void Function(ERR) f);
 }
