@@ -10,4 +10,18 @@ class Err<OK, ERR> implements Result<OK, ERR> {
 
   @override
   bool get isErr => true;
+
+  @override
+  bool operator ==(Object other) {
+    return other is Err<OK, ERR> && other.error == error;
+  }
+
+  @override
+  int get hashCode => error.hashCode ^ _magic;
+
+  @override
+  OK unwrap() => throw ErrUnwrappedError(error);
+
+  @override
+  OK unwrapOr(OK defaultValue) => defaultValue;
 }
