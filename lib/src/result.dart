@@ -29,4 +29,7 @@ abstract class Result<OK, ERR> {
 
   /// returns error or throws `OkUnwrappedError` if type is Ok
   ERR unwrapErr();
+
+  /// returns value if type is Ok or null if type is Err
+  OK? get ok;
 }

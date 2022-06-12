@@ -30,4 +30,7 @@ class Ok<OK, ERR> implements Result<OK, ERR> {
 
   @override
   ERR unwrapErr() => throw OkUnwrappedError(value);
+
+  @override
+  OK? get ok => value;
 }

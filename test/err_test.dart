@@ -78,4 +78,10 @@ void main() {
       expect(const Err(1).unwrapErr(), 1);
     });
   });
+
+  group('ok', () {
+    test('should return null', () {
+      expect(const Err(1).ok, null);
+    });
+  });
 }

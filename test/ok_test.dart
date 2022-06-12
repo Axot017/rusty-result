@@ -78,4 +78,10 @@ void main() {
       expect(value.unwrapErr, throwsA(isA<OkUnwrappedError>()));
     });
   });
+
+  group('ok', () {
+    test('should return value', () {
+      expect(const Ok(1).ok, 1);
+    });
+  });
 }
