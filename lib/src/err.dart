@@ -17,5 +17,11 @@ class Err<OK, ERR> implements Result<OK, ERR> {
   }
 
   @override
-  int get hashCode => error.hashCode;
+  int get hashCode => error.hashCode ^ _magic;
+
+  @override
+  OK unwrap() => throw ErrUnwrappedError(error);
+
+  @override
+  OK unwrapOr(OK defaultValue) => defaultValue;
 }

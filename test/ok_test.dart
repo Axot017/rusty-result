@@ -27,20 +27,32 @@ void main() {
 
     test('should be not equal', () {
       expect(const Ok(1), isNot(const Ok(2)));
+      expect(const Ok(1), isNot(1));
       expect(const Ok('a'), isNot(const Ok('abc')));
       expect(const Ok(true), isNot(const Ok(false)));
     });
   });
 
   group('hashCode', () {
-    test('should return same hashCode as value', () {
-      expect(const Ok(1).hashCode, 1.hashCode);
-      expect(const Ok('abc').hashCode, 'abc'.hashCode);
-    });
-
     test('should return same hashCode as value as other instance', () {
       expect(const Ok(1).hashCode, const Ok(1).hashCode);
       expect(const Ok('abc').hashCode, const Ok('abc').hashCode);
+    });
+  });
+
+  group('unwrap', () {
+    test('should return unwrapped value', () {
+      const value = Ok(1);
+
+      expect(value.unwrap(), 1);
+    });
+  });
+
+  group('unwrapOr', () {
+    test('should return unwrapped value', () {
+      const value = Ok(1);
+
+      expect(value.unwrapOr(2), 1);
     });
   });
 }

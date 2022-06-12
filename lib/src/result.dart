@@ -1,5 +1,9 @@
+import 'package:rusty_result/src/errors.dart';
+
 part 'ok.dart';
 part 'err.dart';
+
+const _magic = 2137;
 
 /// Result<OK, ERR> is the type used for declarating return type of function that can resolve with error.
 ///
@@ -13,4 +17,9 @@ abstract class Result<OK, ERR> {
 
   /// Return true if Result is Err end false if result is Ok
   bool get isErr;
+
+  /// Returns value or throws a `ErrUnwrappedError` when type is Err
+  OK unwrap();
+
+  OK unwrapOr(OK defaultValue);
 }

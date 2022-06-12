@@ -1,4 +1,5 @@
 import 'package:rusty_result/rusty_result.dart';
+import 'package:rusty_result/src/errors.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -35,14 +36,25 @@ void main() {
   });
 
   group('hashCode', () {
-    test('should return same hashCode as value', () {
-      expect(const Err(1).hashCode, 1.hashCode);
-      expect(const Err('abc').hashCode, 'abc'.hashCode);
-    });
-
     test('should return same hashCode as value as other instance', () {
       expect(const Err(1).hashCode, const Err(1).hashCode);
       expect(const Err('abc').hashCode, const Err('abc').hashCode);
+    });
+  });
+
+  group('unwrap', () {
+    test('should throw', () {
+      final value = Err(Exception(''));
+
+      expect(value.unwrap, throwsA(isA<ErrUnwrappedError>()));
+    });
+  });
+
+  group('unwrapOr', () {
+    test('should return unwrapped value', () {
+      final value = Err(Exception(''));
+
+      expect(value.unwrapOr(2), 2);
     });
   });
 }

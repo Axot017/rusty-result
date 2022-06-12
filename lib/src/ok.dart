@@ -17,5 +17,11 @@ class Ok<OK, ERR> implements Result<OK, ERR> {
   }
 
   @override
-  int get hashCode => value.hashCode;
+  int get hashCode => value.hashCode ^ _magic;
+
+  @override
+  OK unwrap() => value;
+
+  @override
+  OK unwrapOr(OK defaultValue) => value;
 }
