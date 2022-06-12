@@ -102,4 +102,15 @@ void main() {
       verify(() => valueChanged.call(1)).called(1);
     });
   });
+
+  group('inspectErr', () {
+    test('should do nothing', () {
+      const value = Ok(1);
+      final valueChanged = MockedValueChanged();
+
+      final result = value.inspectErr(valueChanged.call);
+      expect(result, value);
+      verifyNever(() => valueChanged.call(any));
+    });
+  });
 }

@@ -41,4 +41,10 @@ class Err<OK, ERR> implements Result<OK, ERR> {
   Result<OK, ERR> inspect(void Function(OK) f) {
     return this;
   }
+
+  @override
+  Result<OK, ERR> inspectErr(void Function(ERR) f) {
+    f(error);
+    return this;
+  }
 }

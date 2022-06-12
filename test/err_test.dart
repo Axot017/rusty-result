@@ -101,4 +101,16 @@ void main() {
       verifyNever(() => valueChanged.call(any));
     });
   });
+
+  group('inspectErr', () {
+    test('should call given function', () {
+      const value = Err(1);
+      final valueChanged = MockedValueChanged<int>();
+      when(() => valueChanged.call(any())).thenReturn(null);
+
+      final result = value.inspectErr(valueChanged.call);
+      expect(result, value);
+      verify(() => valueChanged.call(1)).called(1);
+    });
+  });
 }

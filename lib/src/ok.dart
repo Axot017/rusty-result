@@ -42,4 +42,9 @@ class Ok<OK, ERR> implements Result<OK, ERR> {
     f(value);
     return this;
   }
+
+  @override
+  Result<OK, ERR> inspectErr(void Function(ERR) f) {
+    return this;
+  }
 }
