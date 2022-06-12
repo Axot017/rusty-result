@@ -33,4 +33,7 @@ class Err<OK, ERR> implements Result<OK, ERR> {
 
   @override
   OK? get ok => null;
+
+  @override
+  ERR? get err => error;
 }
