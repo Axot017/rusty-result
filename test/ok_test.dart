@@ -1,5 +1,6 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:rusty_result/rusty_result.dart';
+import 'package:rusty_result/src/errors.dart';
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -67,6 +68,20 @@ void main() {
       expect(value.unwrapOrElse(mockedGetValue.call), 1);
 
       verifyNever(() => mockedGetValue.call());
+    });
+  });
+
+  group('unwrapErr', () {
+    test('should throw OkUnwrappedError', () {
+      const value = Ok(1);
+
+      expect(value.unwrapErr, throwsA(isA<OkUnwrappedError>()));
+    });
+  });
+
+  group('ok', () {
+    test('should return value', () {
+      expect(const Ok(1).ok, 1);
     });
   });
 }

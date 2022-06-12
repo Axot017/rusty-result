@@ -27,4 +27,10 @@ class Err<OK, ERR> implements Result<OK, ERR> {
 
   @override
   OK unwrapOrElse(OK Function() getDefault) => getDefault();
+
+  @override
+  ERR unwrapErr() => error;
+
+  @override
+  OK? get ok => null;
 }

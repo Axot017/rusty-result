@@ -72,4 +72,16 @@ void main() {
       verify(() => mockedGetValue.call()).called(1);
     });
   });
+
+  group('unwrapErr', () {
+    test('should return error', () {
+      expect(const Err(1).unwrapErr(), 1);
+    });
+  });
+
+  group('ok', () {
+    test('should return null', () {
+      expect(const Err(1).ok, null);
+    });
+  });
 }
