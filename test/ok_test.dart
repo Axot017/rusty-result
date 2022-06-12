@@ -120,4 +120,11 @@ void main() {
       expect(value.map((v) => v.toString()), const Ok('1'));
     });
   });
+
+  group('mapErr', () {
+    test('chould do nothing', () {
+      const value = Ok(1);
+      expect(value.mapErr((v) => v.toString()), value);
+    });
+  });
 }

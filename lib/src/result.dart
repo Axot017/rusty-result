@@ -44,4 +44,7 @@ abstract class Result<OK, ERR> {
 
   /// Transforms Result<T, E> into Result<U, E> by applying the provided function to the contained value of Ok and leaving Err unchanged
   Result<O, ERR> map<O>(O Function(OK) f);
+
+  /// Transforms Result<T, E> into Result<T, F> by applying the provided function to the contained value of Err and leaving Ok values unchanged
+  Result<OK, E> mapErr<E>(E Function(ERR) f);
 }
