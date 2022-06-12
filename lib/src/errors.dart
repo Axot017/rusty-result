@@ -4,3 +4,10 @@ class ErrUnwrappedError<T> extends Error {
 
   final T error;
 }
+
+/// Error thrown when `.unwrapErr()` is called on Ok type
+class OkUnwrappedError<T> extends Error {
+  OkUnwrappedError(this.value);
+
+  final T value;
+}
