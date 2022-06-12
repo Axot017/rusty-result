@@ -1,5 +1,8 @@
+import 'package:mocktail/mocktail.dart';
 import 'package:rusty_result/rusty_result.dart';
 import 'package:test/test.dart';
+
+import 'helpers.dart';
 
 void main() {
   group('isOk', () {
@@ -53,6 +56,17 @@ void main() {
       const value = Ok(1);
 
       expect(value.unwrapOr(2), 1);
+    });
+  });
+
+  group('unwrapOrElse', () {
+    test('should return unwrapped value', () {
+      const value = Ok(1);
+      final mockedGetValue = MockedGetValue<int>();
+
+      expect(value.unwrapOrElse(mockedGetValue.call), 1);
+
+      verifyNever(() => mockedGetValue.call());
     });
   });
 }

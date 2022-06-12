@@ -24,4 +24,7 @@ class Err<OK, ERR> implements Result<OK, ERR> {
 
   @override
   OK unwrapOr(OK defaultValue) => defaultValue;
+
+  @override
+  OK unwrapOrElse(OK Function() getDefault) => getDefault();
 }
