@@ -10,4 +10,13 @@ void main() {
       expect(err.isOk, false);
     });
   });
+
+  group('isErr', () {
+    test('shoud return true', () {
+      final e = Exception('error');
+      final Result<int, Exception> err = Err(e);
+
+      expect(err.isOk, true);
+    });
+  });
 }

@@ -7,4 +7,7 @@ class Err<OK, ERR> implements Result<OK, ERR> {
 
   @override
   bool get isOk => false;
+
+  @override
+  bool get isErr => true;
 }
