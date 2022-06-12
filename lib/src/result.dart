@@ -21,5 +21,9 @@ abstract class Result<OK, ERR> {
   /// Returns value or throws a `ErrUnwrappedError` when type is Err
   OK unwrap();
 
+  /// Returns value or [defaultValue] if type is Err
   OK unwrapOr(OK defaultValue);
+
+  /// Returns value or executes [getValue] and returns it's result if type is Err
+  OK unwrapOrElse(OK Function() getDefault);
 }
