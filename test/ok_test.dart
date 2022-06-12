@@ -4,9 +4,17 @@ import 'package:test/test.dart';
 void main() {
   group('isOk', () {
     test('should return true', () {
-        const Result<int, Exception> value = Ok(1);
+      const Result<int, Exception> value = Ok(1);
 
-        expect(value.isOk, true);
-      });
+      expect(value.isOk, true);
+    });
+  });
+
+  group('isErr', () {
+    test('should return false', () {
+      const Result<int, Exception> value = Ok(1);
+
+      expect(value.isErr, false);
+    });
   });
 }
