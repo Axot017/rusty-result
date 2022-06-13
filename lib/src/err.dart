@@ -47,4 +47,14 @@ class Err<OK, ERR> implements Result<OK, ERR> {
     f(error);
     return this;
   }
+
+  @override
+  Result<O, ERR> map<O>(O Function(OK) f) {
+    return Err(error);
+  }
+
+  @override
+  Result<OK, E> mapErr<E>(E Function(ERR) f) {
+    return Err(f(error));
+  }
 }
