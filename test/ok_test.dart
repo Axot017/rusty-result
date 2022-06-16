@@ -91,13 +91,13 @@ void main() {
     });
   });
 
-  group('inspect', () {
+  group('inspectOk', () {
     test('should call given function', () {
       const value = Ok(1);
       final valueChanged = MockedValueChanged<int>();
       when(() => valueChanged.call(any())).thenReturn(null);
 
-      final result = value.inspect(valueChanged.call);
+      final result = value.inspectOk(valueChanged.call);
       expect(result, value);
       verify(() => valueChanged.call(1)).called(1);
     });
@@ -114,10 +114,10 @@ void main() {
     });
   });
 
-  group('map', () {
+  group('mapOk', () {
     test('should map int to string', () {
       const value = Ok(1);
-      expect(value.map((v) => v.toString()), const Ok('1'));
+      expect(value.mapOk((v) => v.toString()), const Ok('1'));
     });
   });
 
@@ -125,6 +125,21 @@ void main() {
     test('chould do nothing', () {
       const value = Ok(1);
       expect(value.mapErr((v) => v.toString()), value);
+    });
+  });
+
+  group('iterator', () {
+    test('should return iterable with one element', () {
+      expect([...const Ok(1)], const [1]);
+    });
+  });
+
+  group('and', () {
+    test('should return value pased as method argument', () {
+const value = Ok(1);
+      expect(value.and(const Ok('2')), const Ok('2'));
+      expect(value.and(const Err('2')), const Err('2'));
+
     });
   });
 }

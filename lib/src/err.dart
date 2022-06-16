@@ -1,6 +1,6 @@
 part of 'result.dart';
 
-class Err<OK, ERR> implements Result<OK, ERR> {
+class Err<OK, ERR> extends Result<OK, ERR> {
   const Err(this.error);
 
   final ERR error;
@@ -38,7 +38,7 @@ class Err<OK, ERR> implements Result<OK, ERR> {
   ERR? get err => error;
 
   @override
-  Result<OK, ERR> inspect(void Function(OK) f) {
+  Result<OK, ERR> inspectOk(void Function(OK) f) {
     return this;
   }
 
@@ -49,12 +49,22 @@ class Err<OK, ERR> implements Result<OK, ERR> {
   }
 
   @override
-  Result<O, ERR> map<O>(O Function(OK) f) {
+  Result<O, ERR> mapOk<O>(O Function(OK) f) {
     return Err(error);
   }
 
   @override
   Result<OK, E> mapErr<E>(E Function(ERR) f) {
     return Err(f(error));
+  }
+
+  @override
+  Iterator<OK> get iterator => _getIterable().iterator;
+
+  Iterable<OK> _getIterable() sync* {}
+
+  @override
+  Result<O, ERR> and<O>(Result<O, ERR> other) {
+    return Err(error);
   }
 }

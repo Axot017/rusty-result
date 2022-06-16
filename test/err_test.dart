@@ -32,9 +32,9 @@ void main() {
     });
 
     test('should be not equal', () {
-      expect(const Err(1), isNot(const Err(2)));
-      expect(const Err('a'), isNot(const Err('abc')));
-      expect(const Err(true), isNot(const Err(false)));
+      expect(const Err(1) != const Err(2), true);
+      expect(const Err('a') != const Err('abc'), true);
+      expect(const Err(true) != const Err(false), true);
     });
   });
 
@@ -91,12 +91,12 @@ void main() {
     });
   });
 
-  group('inspect', () {
+  group('inspectOk', () {
     test('should do nothing', () {
       const value = Err(1);
       final valueChanged = MockedValueChanged();
 
-      final result = value.inspect(valueChanged.call);
+      final result = value.inspectOk(valueChanged.call);
       expect(result, value);
       verifyNever(() => valueChanged.call(any));
     });
@@ -114,10 +114,10 @@ void main() {
     });
   });
 
-  group('map', () {
+  group('mapOn', () {
     test('chould do nothing', () {
       const error = Err(1);
-      expect(error.map((v) => v.toString()), error);
+      expect(error.mapOk((v) => v.toString()), error);
     });
   });
 
@@ -125,6 +125,19 @@ void main() {
     test('should map int to string', () {
       const error = Err(1);
       expect(error.mapErr((v) => v.toString()), const Err('1'));
+    });
+  });
+
+  group('iterator', () {
+    test('should return empty iterator', () {
+      expect([...const Err<int, int>(1)], const <int>[]);
+    });
+  });
+
+  group('and', () {
+    test('should return error', () {
+      const error = Err('1');
+      expect(error.and(const Ok(1)), error);
     });
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:rusty_result/src/errors.dart';
 
 part 'ok.dart';
@@ -11,7 +13,8 @@ const _magic = 2137;
 ///
 /// - Ok - representing success and containing value of typ [OK]
 /// - Err - representing failure and containing error of typ [ERR]
-abstract class Result<OK, ERR> {
+abstract class Result<OK, ERR> with IterableMixin<OK> {
+  const Result();
   /// Return true if Result is Ok and false if Result is Err
   bool get isOk;
 
@@ -37,14 +40,17 @@ abstract class Result<OK, ERR> {
   ERR? get err;
 
   /// calls given [f] if type is Ok. Returns `this`
-  Result<OK, ERR> inspect(void Function(OK) f);
+  Result<OK, ERR> inspectOk(void Function(OK) f);
 
   /// calls given [f] if type is Err. Returns `this`
   Result<OK, ERR> inspectErr(void Function(ERR) f);
 
   /// Transforms Result<T, E> into Result<U, E> by applying the provided function to the contained value of Ok and leaving Err unchanged
-  Result<O, ERR> map<O>(O Function(OK) f);
+  Result<O, ERR> mapOk<O>(O Function(OK) f);
 
   /// Transforms Result<T, E> into Result<T, F> by applying the provided function to the contained value of Err and leaving Ok values unchanged
   Result<OK, E> mapErr<E>(E Function(ERR) f);
+
+  /// Returns [other] if the result is Ok, otherwise returns the Err value of self.
+  Result<O, ERR> and<O>(Result<O, ERR> other);
 }
