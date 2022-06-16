@@ -136,10 +136,16 @@ void main() {
 
   group('and', () {
     test('should return value pased as method argument', () {
-const value = Ok(1);
+      const value = Ok(1);
       expect(value.and(const Ok('2')), const Ok('2'));
       expect(value.and(const Err('2')), const Err('2'));
+    });
+  });
 
+  group('or', () {
+    test('should return ok', () {
+      const value = Ok(1);
+      expect(value.and(const Ok(1)), value);
     });
   });
 }

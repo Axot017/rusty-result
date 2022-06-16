@@ -51,6 +51,9 @@ abstract class Result<OK, ERR> with IterableMixin<OK> {
   /// Transforms Result<T, E> into Result<T, F> by applying the provided function to the contained value of Err and leaving Ok values unchanged
   Result<OK, E> mapErr<E>(E Function(ERR) f);
 
-  /// Returns [other] if the result is Ok, otherwise returns the Err value of self.
+  /// Returns [other] if the result is Ok, otherwise returns the Err value of self
   Result<O, ERR> and<O>(Result<O, ERR> other);
+
+  /// Returns [other] if the result is Err, otherwise returns the Ok value of self
+  Result<OK, E> or<E>(Result<OK, E> other);
 }

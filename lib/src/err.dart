@@ -67,4 +67,9 @@ class Err<OK, ERR> extends Result<OK, ERR> {
   Result<O, ERR> and<O>(Result<O, ERR> other) {
     return Err(error);
   }
+
+  @override
+  Result<OK, E> or<E>(Result<OK, E> other) {
+    return other;
+  }
 }

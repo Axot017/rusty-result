@@ -69,4 +69,9 @@ class Ok<OK, ERR> extends Result<OK, ERR> {
   Result<O, ERR> and<O>(Result<O, ERR> other) {
     return other;
   }
+
+  @override
+  Result<OK, E> or<E>(Result<OK, E> other) {
+    return Ok(value);
+  }
 }
