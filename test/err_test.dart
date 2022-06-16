@@ -140,4 +140,12 @@ void main() {
       expect(error.and(const Ok(1)), error);
     });
   });
+
+  group('or', () {
+    test('should return value pased as method argument', () {
+      const error = Err(1);
+      expect(error.or(const Ok('2')), const Ok('2'));
+      expect(error.or(const Err('2')), const Err('2'));
+    });
+  });
 }
