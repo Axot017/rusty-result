@@ -56,4 +56,7 @@ abstract class Result<OK, ERR> with IterableMixin<OK> {
 
   /// Returns [other] if the result is Err, otherwise returns the Ok value of self
   Result<OK, E> or<E>(Result<OK, E> other);
+
+  /// Calls [f] if the result is Ok, otherwise returns the Err value of self.
+  Result<O, ERR> andThen<O>(Result<O, ERR> Function(OK) f);
 }
